@@ -5,7 +5,12 @@ public class OperadoresIncrementales {
 
         // Pre incremento
         int i = 1;
-        int j = ++i; // i = i + 1
+        System.out.println("i = " + i);
+        int j = i++; // i = i + 1
+        /*
+        int j = i;
+        i = i+1;
+         */
 
         System.out.println("i = " + i);
         System.out.println("j = " + j);

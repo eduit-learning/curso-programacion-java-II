@@ -10,6 +10,8 @@ public class OperadoresAritmeticos {
         System.out.println("suma = " + suma);
 
         System.out.println("i + j = " + (i + j));
+
+        int operacion = 3*4/2-(5*8);
         
         int resta = i - j;
         System.out.println("resta = " + resta);
@@ -30,6 +32,7 @@ public class OperadoresAritmeticos {
         System.out.println("resto = " + resto);
 
         int numero = Integer.parseInt(JOptionPane.showInputDialog("ingrese un numero"));
+
         if(numero % 2 == 0){
             System.out.println("numero par = " + numero);
         } else {

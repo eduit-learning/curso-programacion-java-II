@@ -1,12 +1,19 @@
 package JavaConsole.Arreglos;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class EjemploArreglos {
+
+    public static  String[] GetProd() {
+        return null;
+    }
     public static void main(String[] args) {
 
-        String[] productos = new String[7];
+        String[] productos;
+        //Operación de base datos o un algo que me regrese la cantidad a ocupar
+        productos = new String[7];
         productos[0] = "Kingston Pendrive 64GB";
         productos[1] = "Samsung Galaxy";
         productos[2] = "Disco Duro SSD Samsung Externo";
@@ -14,6 +21,11 @@ public class EjemploArreglos {
         productos[4] = "Macbook Air";
         productos[5] = "Chromecast 4ta generación";
         productos[6] = "Bicicleta Oxford";
+        //productos[7] = "asdadssd";
+
+        ArrayList<Integer> x =new ArrayList<Integer>();
+        //utilizo mi array y llega al 10 mil
+        //lo limpio para utilizarlo de nuevo
 
         Arrays.sort(productos);
 

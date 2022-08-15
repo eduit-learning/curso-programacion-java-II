@@ -4,9 +4,10 @@ public class OperadoresLogico {
     public static void main(String[] args) {
         
         int i = 3;
-        byte j = 3;
-        float k = 127e-7f;
-        double l = 2.1413e3;
+        byte j = 127;
+        float k = 127e-7f;//64 bits
+        float y = 123.3456f;//123.3456 este número es tratado como doble en Java
+        double l = 2.1413e3;//128 bits
         boolean m = false;
         
         boolean b1 = i == j && k < l && m == false;

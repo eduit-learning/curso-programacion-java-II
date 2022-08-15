@@ -2,16 +2,17 @@ package JavaConsole.Basics;
 
 public class HolaMundo {
     public static void main(String[] args) {
-        
+
         String saludar = "Hola Mundo desde Java";
         System.out.println(saludar);
         System.out.println("saludar.toUpperCase() = " + saludar.toUpperCase());
 
-        int numero = 11;
+        int x = 3;
+        int numero = 1 + x;
 
         boolean valor = true;
         int numero2 = 5;
-        if(valor){
+        if (valor) {
             System.out.println("numero = " + numero);
             numero2 = 10;
         }
@@ -23,7 +24,7 @@ public class HolaMundo {
 
         nombre = "Andrés";
 
-        if(numero >10){
+        if (numero > 10) {
             nombre = "Juan";
         }
 
@@ -31,5 +32,4 @@ public class HolaMundo {
 
         int edadPersona = 5;
     }
-
 }
