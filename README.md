@@ -1,6 +1,8 @@
 # Curso de programación con Java – II
 Este material cuenta con una serie de temas que profundizan en temas avanzados acerca del lenguaje de programación Java. Son 8 módulos los que abarca y que proveen al lector el conocimiento necesario para entender el tema y aplicar los conocimientos en los laboratorios.
+
 Al final de cada módulo se encuentra un laboratorio que el lector debe resolver, estos laboratorios cuentan con dos secciones; evaluación y ejercicio práctico. La evaluación no es más que un cuestionario sobre el módulo terminado y el ejercicio práctico es un problema que el lector debe resolver empleando lo aprendido en el módulo.
+
 Este material, los ejemplos que muestra y laboratorios están desarrollados utilizando la última versión estable al momento de su redacción, JDK 17 LTS y Jakarta EE 9.1. Todos los ejemplos, resolución de laboratorios y ejercicios los podrá encontrar en el siguiente repositorio público: https://github.com/eduit-learning/curso-programacion-java-II.git.
 
 ## Módulo 1 - Resumen Java Basics
@@ -29,4 +31,6 @@ Este módulo continúa con el desarrollo de aplicaciones empresariales con Java,
 
 ## Módulo 9 - Laboratorio - Aplicación final
 Este último módulo detalla las características que debe cumplir el proyecto final y que el lector debe desarrollar.
-Este material fue completamente desarrollado por Grupo EduIT, Entrenamiento Informático Avanzado S.A. de C.V.
+
+
+***Este material fue completamente desarrollado por Grupo EduIT, Entrenamiento Informático Avanzado S.A. de C.V.***
