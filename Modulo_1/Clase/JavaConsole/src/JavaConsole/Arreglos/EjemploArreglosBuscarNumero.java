@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class EjemploArreglosBuscarNumero {
     public static void main(String[] args) {
-/*
+/* //Ejemplo 1, descomentar para probar
         int[] a = new int[10];
 
         Scanner s = new Scanner(System.in);
@@ -32,7 +32,7 @@ public class EjemploArreglosBuscarNumero {
             System.out.println("Encontrado en la posición: " + i);
         }
 
- */
+ */ //Ejemplo 2, descomentar para probar
         /*int[] arregloNumeros = new int[100];
         for(int i = 0; i < 100; i++){
             arregloNumeros[i] = i;
