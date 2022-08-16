@@ -8,7 +8,7 @@ public class EjemploAsignarPropiedadesDeSistema {
     public static void main(String[] args) {
 
         try {
-            FileInputStream archivo = new FileInputStream("src/config.properties");
+            FileInputStream archivo = new FileInputStream("src/JavaConsole/Basics/config.properties");
 
             Properties p = new Properties(System.getProperties());
             p.load(archivo);

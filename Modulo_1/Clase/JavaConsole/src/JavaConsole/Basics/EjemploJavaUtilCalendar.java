@@ -1,13 +1,15 @@
 package JavaConsole.Basics;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class EjemploJavaUtilCalendar {
     public static void main(String[] args) {
-
-        Calendar calendario = Calendar.getInstance();
+        //Locale.setDefault(new Locale("es", "MX"));
+        Calendar calendario = Calendar.getInstance(new Locale("es", "MX"));
 
         //calendario.set(2019, Calendar.SEPTEMBER, 25, 18, 20, 10);
         calendario.set(Calendar.YEAR, 2020);
@@ -25,6 +27,7 @@ public class EjemploJavaUtilCalendar {
         System.out.println("fecha sin formato = " + fecha);
 
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS a");
+        //DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM,new Locale("es","MX"));
         String fechaConFormato = formato.format(fecha);
         System.out.println("fecha Con Formato = " + fechaConFormato);
 

@@ -14,8 +14,10 @@ public class EjemploJavaUtilDate {
         String fechaStr = df.format(fecha);
 
         long j = 0;
-        for(int i = 0; i < 100000000; i++){
-            j +=i;
+        for(int i = 0; i < 999999999; i++){
+            for(int k = 0; k < 2; k++) {
+                j += i;
+            }
         }
         System.out.println("j = " + j);
 

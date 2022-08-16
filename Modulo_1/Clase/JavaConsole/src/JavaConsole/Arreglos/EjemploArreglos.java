@@ -2,13 +2,11 @@ package JavaConsole.Arreglos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class EjemploArreglos {
 
-    public static  String[] GetProd() {
-        return null;
-    }
     public static void main(String[] args) {
 
         String[] productos;
@@ -66,4 +64,6 @@ public class EjemploArreglos {
         System.out.println("k = " + k);
         System.out.println("l = " + l);
     }
+
+
 }
