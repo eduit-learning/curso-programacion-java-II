@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
+/*
+productos 0xABC123 (0XABC124, 0XABC125, 0XABC126)
+[0]    0XABC124 -> null
+[1]    0XABC125 -> null
+[2]    0XABC126 -> null
+*/
+
 
 public class EjemploArreglos {
 
@@ -63,7 +70,13 @@ public class EjemploArreglos {
         System.out.println("j = " + j);
         System.out.println("k = " + k);
         System.out.println("l = " + l);
+
+        for (int n = 0; n < numeros.length; n++){
+            System.out.println(numeros[n]);
+        }
+
+        for(int element : numeros){
+            System.out.println(element);
+        }
     }
-
-
 }
