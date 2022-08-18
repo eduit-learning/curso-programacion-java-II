@@ -1,5 +1,7 @@
 package JavaConsole.Hilos.ejemplos.runnable;
 
+//Generalmente se usa para cuando quieres utilizar hilos y no puedes extender de Thread, porque ya extiendes de
+//otra clase
 public class ViajeTarea implements Runnable{
     private String nombre;
 

@@ -1,13 +1,14 @@
 package JavaConsole.Archivos.servicio;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.Scanner;
 
 public class ArchivoServicio {
 
-    public void crearArchivo(String nombre){
+    public void crearArchivo(String nombre) {
         File archivo = new File(nombre);
-        try (BufferedWriter buffer = new BufferedWriter(new FileWriter(archivo, true))){
+        try (BufferedWriter buffer = new BufferedWriter(new FileWriter(archivo, true))) {
 
             buffer.append("Hola que tal amigos!\n")
                     .append("Todo bien? yo acá escribiendo un archivo...\n")
@@ -19,9 +20,9 @@ public class ArchivoServicio {
         }
     }
 
-    public void crearArchivo2(String nombre){
+    public void crearArchivo2(String nombre) {
         File archivo = new File(nombre);
-        try (PrintWriter buffer = new PrintWriter(new FileWriter(archivo, true))){
+        try (PrintWriter buffer = new PrintWriter(new FileWriter(archivo,Charset.forName("UTF-32"), true))) {
 
             buffer.println("Hola que tal amigos!");
             buffer.println("Todo bien? yo acá escribiendo un archivo...");
@@ -33,13 +34,14 @@ public class ArchivoServicio {
         }
     }
 
-    public String leerArchivo(String nombre){
+    public String leerArchivo(String nombre) {
         StringBuilder sb = new StringBuilder();
+
         File archivo = new File(nombre);
-        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
 
             String linea;
-            while ( (linea = reader.readLine()) != null){
+            while ((linea = reader.readLine()) != null) {
                 sb.append(linea).append("\n");
             }
         } catch (IOException e) {
@@ -48,13 +50,13 @@ public class ArchivoServicio {
         return sb.toString();
     }
 
-    public String leerArchivo2(String nombre){
+    public String leerArchivo2(String nombre) {
         StringBuilder sb = new StringBuilder();
         File archivo = new File(nombre);
-        try (Scanner s = new Scanner(archivo)){
+        try (Scanner s = new Scanner(archivo)) {
 
             s.useDelimiter("\n");
-            while (s.hasNext()){
+            while (s.hasNext()) {
                 sb.append(s.next()).append("\n");
             }
 

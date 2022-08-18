@@ -2,9 +2,12 @@ package JavaConsole.Basics;
 
 public class EjemploStringMetodos {
     public static void main(String[] args) {
-        
-        String nombre = "Andres";
 
+        String nombre = "Andres";
+        String nombre2 = "Andres";
+        String nombre3 = "Andres";
+        String nombren = "Andres";
+        /*
         System.out.println("nombre.length() = " + nombre.length());
         System.out.println("nombre.toUpperCase() = " + nombre.toUpperCase());
         System.out.println("nombre.toLowerCase() = " + nombre.toLowerCase());
@@ -29,9 +32,22 @@ public class EjemploStringMetodos {
         System.out.println("trabalenguas.indexOf('t') = " + trabalenguas.indexOf("lenguas"));
         System.out.println("trabalenguas.contains('t') = " + trabalenguas.contains("lenguas"));
         System.out.println("trabalenguas.startsWith(\"tr\") = " + trabalenguas.startsWith("tr"));
-        System.out.println("trabalenguas.endsWith(\"s\") = " + trabalenguas.endsWith("s"));
+        System.out.println("trabalenguas.endsWith(\"s\") = " + trabalenguas.endsWith("xguas"));
         System.out.println("  trabalenguas ");
-        System.out.println("  trabalenguas ".trim());
-        
+        System.out.println("  trabalenguas ".trim());*/
+
+        if (nombre == "AAndres") {
+            System.out.println("Sí son iguales");
+        }
+
+        if (nombre.equals("Andres") == true) {
+            System.out.println("Sí son iguales");
+        }
+
     }
 }
+/*
+Las cadenas se guardan en un HEAP. Lo que hace Java es generar un Pool
+["Sí son iguales", "Andres", "Trabalenguas", "x", "y", "z", "andres", "AAndres"]
+Andres -> nombre | Andres -> variable temporal en la línea 36 | Andres variable temporal en la línea 40
+ */

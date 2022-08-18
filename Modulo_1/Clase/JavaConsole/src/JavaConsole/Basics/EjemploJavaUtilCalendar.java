@@ -8,7 +8,8 @@ import java.util.Locale;
 
 public class EjemploJavaUtilCalendar {
     public static void main(String[] args) {
-        //Locale.setDefault(new Locale("es", "MX"));
+        Locale.setDefault(new Locale("es", "MX"));
+        //Locale.getDefault();
         Calendar calendario = Calendar.getInstance(new Locale("es", "MX"));
 
         //calendario.set(2019, Calendar.SEPTEMBER, 25, 18, 20, 10);
@@ -26,9 +27,9 @@ public class EjemploJavaUtilCalendar {
         Date fecha = calendario.getTime();
         System.out.println("fecha sin formato = " + fecha);
 
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS a");
-        //DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM,new Locale("es","MX"));
-        String fechaConFormato = formato.format(fecha);
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS a", new Locale("es", "MX"));
+        DateFormat df = DateFormat.getDateInstance(DateFormat.MONTH_FIELD,new Locale("es","MX"));
+        String fechaConFormato = df.format(fecha);
         System.out.println("fecha Con Formato = " + fechaConFormato);
 
         Calendar calActual = Calendar.getInstance();
@@ -49,6 +50,18 @@ public class EjemploJavaUtilCalendar {
         } else if(fecha.compareTo(fecha2) == 0){
             System.out.println("fecha es igual a fecha2");
         }
+
+    }
+
+    public static void Log(int id, String mensaje){
+
+    }
+
+    public static void Log(int id, String mensaje, int idError){
+
+    }
+
+    public static void Log(String mensaje, String mensajeError, int id, int idError){
 
     }
 }
