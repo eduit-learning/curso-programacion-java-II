@@ -29,7 +29,7 @@ public class EjemploJavaUtilDate {
          */
 
         //https://www.digitalocean.com/community/tutorials/java-simpledateformat-java-date-format
-        String pattern = "EEEEE dd 'de' MMMMM 'de' yyyy HH:mm:ss";
+        String pattern = "EEEEE dd 'de' MMMMM 'de' yyyy HH:mm:ss G";
         SimpleDateFormat simpleDateFormat =new SimpleDateFormat(pattern, new Locale("es", "MX"));
         String date = simpleDateFormat.format(new Date());
         System.out.println(date);

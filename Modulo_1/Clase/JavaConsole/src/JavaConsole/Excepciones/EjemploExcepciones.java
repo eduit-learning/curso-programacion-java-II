@@ -5,6 +5,8 @@ import javax.swing.*;
 public class EjemploExcepciones {
     public static void main(String[] args) {
 
+        //System.out.println("MAX: " + Double.MAX_VALUE + " | MIN" + Double.MIN_VALUE);
+
         Calculadora cal = new Calculadora();
         String numerador = JOptionPane.showInputDialog("ingrese un entero numerador:");
         String denominador = JOptionPane.showInputDialog("ingrese un entero denominador:");
@@ -23,5 +25,6 @@ public class EjemploExcepciones {
             System.out.println("Es opcional, pero se ejecuta siempre con excepción o sin!");
         }
         System.out.println("Continuamos con el flujo de nuestra aplicación!");
+
     }
 }
