@@ -64,9 +64,9 @@ public class Calculator {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(leftOperand == null || leftOperand == 0.0) {
+            if (leftOperand == null || leftOperand == 0.0) {
                 value = resultsTxt.getText() + value;
-            }else{
+            } else {
                 rightOperand = Double.valueOf(value);
             }
             resultsTxt.setText(value);
@@ -113,7 +113,7 @@ public class Calculator {
         @Override
         public void actionPerformed(ActionEvent e) {
             Double output = calcOperation.getOperator().applyAsDouble(leftOperand, rightOperand);
-            resultsTxt.setText(output%1==0?String.valueOf(output.intValue()):String.valueOf(output));
+            resultsTxt.setText(output % 1 == 0 ? String.valueOf(output.intValue()) : String.valueOf(output));
             leftOperand = 0.0;
             rightOperand = 0.0;
         }
@@ -123,7 +123,7 @@ public class Calculator {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            resultsTxt.setText("-"+ resultsTxt.getText());
+            resultsTxt.setText("-" + resultsTxt.getText());
         }
     }
 
