@@ -37,6 +37,15 @@ public class Alumno implements Comparable<Alumno>{
 
     @Override
     public int compareTo(Alumno a) {
+        //Otra forma de validación
+        /*if(this.nombre == a.nombre && this.nota == a.nota){
+            return 0;
+        } else if (this.nota > a.nota) {
+            return  1;
+        }
+
+        return -1;*/
+
         if(this.nombre == null){
             return 0;
         }

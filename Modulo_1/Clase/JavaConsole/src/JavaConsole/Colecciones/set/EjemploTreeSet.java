@@ -1,5 +1,7 @@
 package JavaConsole.Colecciones.set;
 
+import JavaConsole.Colecciones.modelo.Alumno;
+
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -26,5 +28,14 @@ public class EjemploTreeSet {
         numeros.add(3);
         numeros.add(10);
         System.out.println("numeros = " + numeros);
+
+        Set<Double> doubles = new TreeSet<>(Comparator.reverseOrder());
+        doubles.add(1.12312);
+        doubles.add(5.56775);
+        doubles.add(4.879779);
+        doubles.add(2.0987986);
+        doubles.add(3.43534);
+        doubles.add(10.345132);
+        System.out.println("doubles = " + doubles);
     }
 }

@@ -8,7 +8,11 @@ import java.util.Set;
 public class EjemploHashMap {
     public static void main(String[] args) {
 
-        Map<String, Object> persona = new HashMap<>();
+        //1.- Recupero del la key vult el secreo con su valor
+        //2.- Lo meto en un diccionario HashMap
+        //3.- Pregunto, exite en el HshMap
+
+        HashMap<String, Object> persona = new HashMap<>();
         System.out.println("contiene elementos=" + !persona.isEmpty());
         persona.put(null, "1234");
         persona.put(null, "12345");
