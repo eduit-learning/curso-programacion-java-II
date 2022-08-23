@@ -1,5 +1,11 @@
 package JavaConsole.Genericos.genericsclass;
 
+/*
+    Deben de crear un departamento de objetos perdidos, este departamento puede tener colecciones
+    de objetos distintos. Por ejemplo Mochilas, Chamarras, Carteras, etc. Deben crear la estructura de
+    clases para este depatamtent y un método para buscar elementos perdidos.
+ */
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

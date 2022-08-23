@@ -1,6 +1,10 @@
 package JavaConsole.Genericos.genericsclass;
 
 public class EjemploGenericos {
+    /*public static <T> void guardarEnBaseDatos(T objetoGuardar, String nombreTabla){
+
+    }*/
+
     public static <T> void imprimirCamion(Camion<T> camion){
         for(T a: camion){
             if(a instanceof Animal) {
