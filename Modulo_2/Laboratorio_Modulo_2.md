@@ -1,27 +1,21 @@
 # Laboratorio Módulo 1
-Este laboratorio busca que el alumno ponga en práctica lo estudiado en el módulo 1 “Resumen Java Basics”. Está conformado de 2 secciones; laboratorio práctico y evaluación.
+Este laboratorio busca que el alumno ponga en práctica lo estudiado en el módulo 2 “Resumen Java Basics”. Está conformado de 2 secciones; laboratorio práctico y evaluación.
 
-## Laboratorio práctico – Contador de palabras
-Desarrollar una aplicación de consola que lea el contenido de un archivo de texto e imprima la cantidad de palabras que tiene, así como la cantidad de letras (no debe incluir espacios). La aplicación debe solicitar al usuario la ruta donde se encuentra el archivo, la aplicación debe ser capaz de leer archivos con cualquier cantidad de texto.
+## Laboratorio práctico – Temario del curso
+Desarrollar una página HTML utilizando TomCat como servidor. La página HTML debe mostrar el nombre de los módulos de este curso y su descripción.
 
-Ejemplo:
-Texto en el archivo: “Hola alumnos del Curso de Java a la medida II”
-Total de palabras: 10
-Total de letras: 36
+### Ejemplo:
+Módulo 1 - Resumen Java Basics
+Este módulo contiene un resumen de la primera entrega de este curso; “Curso de programación con Java”. Explica los puntos más importantes de la primera entrega, pasando por los clásicos proyectos de consola, aplicaciones de escritorio, patrones de diseño y una breve introducción al desarrollo web.
+
+### Módulo 2 - Introducción a Jakarta EE
+Jakarta EE es la nueva versión de Java EE que brinda a los desarrolladores un conjunto integral de especificaciones abiertas y neutrales que se utilizan para desarrollar aplicaciones Java modernas y nativas de la nube desde cero. En este módulo entenderá qué hay detrás de Jakarta EE, cómo surgió y como preparar su entorno de trabajo para poder trabajar con él.
 
 ## Evaluación:
-1.	¿Cuál es la diferencia entre Value Types y Reference Types?
+1.	¿Qué es apache TomCat?
 
-2.	¿Cuáles son los tipos primitivos de datos en Java?
+2.	¿Por qué Java EE ahora se llama Jakarta EE?
 
-3.	¿Para qué sirve la interface Comparable<>?
+3.	¿Por qué debo utilizar un Servidor Web como Apache TomCat para desarrollar aplicaciones Jakarta EE?
 
-4.	¿Cuándo es necesario sobrescribir el método “equals” de una clase?
-
-5.	¿Para qué sirven los tipos de datos genéricos en Java?
-
-6.	¿Por qué cuando sobrescribes el método “equals” se recomienda sobrescribir también el método “hashCode”?
-
-7.	¿Cuál es la mejor práctica en el manejo de excepciones?
-
-8.	Cuando trabajas con hilos ¿Cuándo extiendes de la clase base Thread y cuando implementas la interface Runnable?
+4.	¿Java EE y Jakarta EE es lo mismo? 
