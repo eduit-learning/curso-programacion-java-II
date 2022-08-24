@@ -32,7 +32,13 @@ public class Calculator {
 
     public Calculator() {
 
-        sevenBtn.addActionListener(new NumberBtnClicked(sevenBtn.getText()));
+        //sevenBtn.addActionListener(new NumberBtnClicked(sevenBtn.getText()));
+        sevenBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resultsTxt.setText("Oprimiste el botón del número 7");
+            }
+        });
         eightBtn.addActionListener(new NumberBtnClicked(eightBtn.getText()));
         nineBtn.addActionListener(new NumberBtnClicked(nineBtn.getText()));
         fourBtn.addActionListener(new NumberBtnClicked(fourBtn.getText()));
@@ -70,7 +76,7 @@ public class Calculator {
                 rightOperand = Double.valueOf(value);
             }
             resultsTxt.setText(value);
-
+//778.0+2
         }
     }
 
@@ -114,6 +120,8 @@ public class Calculator {
         public void actionPerformed(ActionEvent e) {
             Double output = calcOperation.getOperator().applyAsDouble(leftOperand, rightOperand);
             resultsTxt.setText(output % 1 == 0 ? String.valueOf(output.intValue()) : String.valueOf(output));
+            //resultsTxt.setText("Aquí debería ir el resultado"); //Asigna lo que le pasas como parámetro a la caja de texto
+            //String val = resultsTxt.getText();//Obtiene el texto que contiene la caja de texto
             leftOperand = 0.0;
             rightOperand = 0.0;
         }
