@@ -1,4 +1,4 @@
-# Laboratorio Módulo 1
+# Laboratorio Módulo 2
 Este laboratorio busca que el alumno ponga en práctica lo estudiado en el módulo 2 “Resumen Java Basics”. Está conformado de 2 secciones; laboratorio práctico y evaluación.
 
 ## Laboratorio práctico – Temario del curso
