@@ -22,10 +22,10 @@ public class DemoServlet extends HttpServlet {
         pw.print("<html>");
         pw.print("<head>");
         pw.print("<meta charset=\"UTF-8\">");
-        pw.print("<title>Hola a mi primer servlet</title>");
+        pw.print("<title>Hola a mi primer servlet desde clase</title>");
         pw.print("</head>");
         pw.print("<body>");
-        pw.print("<h1>Hola a mi primer servlet</h1>");
+        pw.print("<h1>Hola a mi primer servlet desde la clase</h1>");
         pw.print("</body>");
         pw.print("</html>");
 
