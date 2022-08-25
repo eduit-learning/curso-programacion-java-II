@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear un nuevo usuario</title>
+</head>
+<body>
+<h3>Crear un nuevo usuario</h3>
+
+<form action="/JakartaEE_Maven/users" method="post">
+    <div>
+        <label for="name">Nombre</label>
+        <div><input type="text" name="name" id="name"></div>
+    </div>
+
+    <div>
+        <label for="lastName">Apellidos</label>
+        <div><input type="text" name="lastName" id="lastName"></div>
+    </div>
+
+    <div>
+        <label for="userName">Nombre de usuario (alias)</label>
+        <div><input type="text" name="userName" id="userName"></div>
+    </div>
+
+    <div>
+        <label for="email">Correo electrónico</label>
+        <div><input type="text" name="email" id="email"></div>
+    </div>
+
+    <div>
+        <label for="password">Contraseña</label>
+        <div><input type="password" name="password" id="password"></div>
+    </div>
+
+    <div>
+        <label for="country">País</label>
+        <div>
+            <select name="country" id="country">
+                <option value="">-- Seleccionar --</option>
+                <option value="MX" selected>México</option>
+                <option value="ES">España</option>
+                <option value="CL">Chile</option>
+                <option value="AR">Argentina</option>
+                <option value="PE">Perú</option>
+                <option value="CO">Colombia</option>
+                <option value="VE">Venezuela</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <label for="programmingLanguages">Lenguajes de programación</label>
+        <div>
+            <select name="programmingLanguages" id="programmingLanguages" multiple>
+                <option value="Java" selected>Java SE</option>
+                <option value="Jakarta EE" selected>Jakarta EE 9</option>
+                <option value="Spring">Spring Boot</option>
+                <option value="JS">JavaScript</option>
+                <option value="Angular" selected>Angular</option>
+                <option value="React">React</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <label>Roles</label>
+        <div>
+            <input type="checkbox" name="roles" value="ROLE_ADMIN">
+            <label>Administrador</label>
+        </div>
+        <div>
+            <input type="checkbox" name="roles" value="ROLE_USER" checked>
+            <label>Usuario</label>
+        </div>
+        <div>
+            <input type="checkbox" name="roles" value="ROLE_MODERATOR">
+            <label>Moderador</label>
+        </div>
+    </div>
+
+    <div>
+        <label>Idiomas</label>
+        <div>
+            <input type="radio" name="language" value="es">
+            <label>Español</label>
+        </div>
+        <div>
+            <input type="radio" name="language" value="en">
+            <label>Inglés</label>
+        </div>
+        <div>
+            <input type="radio" name="language" value="fr">
+            <label>Frances</label>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" value="Enviar">
+        </div>
+    </div>
+</form>
+</body>
+</html>
