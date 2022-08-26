@@ -2,7 +2,7 @@ package Servlets;
 
 import Servlets.Models.User;
 import Servlets.Repository.Context;
-//import com.google.gson.Gson;
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,10 +14,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/manager-users")
+@WebServlet("/users")
 public class CRUDUsersServlet extends HttpServlet {
 
-    //private Gson gson = new Gson();
+    private Gson gson = new Gson();
     private static Context cnt = new Context();
 
     @Override
@@ -34,25 +34,21 @@ public class CRUDUsersServlet extends HttpServlet {
 
                 if (result.isEmpty() == true) {
                     resp.setStatus(HttpServletResponse.SC_OK);
-                    out.print("{\"message\": \"No se encontraron coincidencias con el parámetro de búsqueda proporcionado\"}");
-                    //out.print(gson.toJson("No se encontraron coincidencias con el parámetro de búsqueda proporcionado"));
+                    out.print(gson.toJson("No se encontraron coincidencias con el parámetro de búsqueda proporcionado"));
                 } else {
-                    //String results = gson.toJson(result);
+                    String results = gson.toJson(result);
 
                     resp.setStatus(HttpServletResponse.SC_OK);
 
-                    out.print("{\"message\": \"Se encontraron " + result.size() + " coincidencias\"}");
-                    //out.print(results);
+                    out.print(results);
                 }
             } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                out.print("{\"message\": \"El parámetro de búsqueda no puede ser null\"}");
-                //out.print(gson.toJson("El parámetro de búsqueda no puede ser null"));
+                out.print(gson.toJson("El parámetro de búsqueda no puede ser null"));
             }
         } catch (Exception ex) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("{\"message\": \"" + ex.getMessage() + "\"}");
-            //out.print(gson.toJson(ex.getMessage()));
+            out.print(gson.toJson(ex.getMessage()));
         } finally {
             out.flush();
             out.close();
@@ -116,7 +112,7 @@ public class CRUDUsersServlet extends HttpServlet {
 
             if (errores.isEmpty() == false) {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                //out.print("{\"message\": \"Ocurrió uno o varios errores en la validación de los datos\", \"errores\":" + gson.toJson(errores) + "}");
+                out.print("{\"message\": \"Ocurrió uno o varios errores en la validación de los datos\", \"errores\":" + gson.toJson(errores) + "}");
             } else {
 
                 User user = new User(name, lastName, email, password);
@@ -128,14 +124,12 @@ public class CRUDUsersServlet extends HttpServlet {
                 cnt.users.add(user);
 
                 resp.setStatus(HttpServletResponse.SC_CREATED);
-                out.print("{\"message\": \"El usuario se creó correctamente\"}");
-                //out.print(gson.toJson("El usuario se creó correctamente"));
+                out.print(gson.toJson("El usuario se creó correctamente"));
             }
 
         } catch (Exception ex) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("{\"message\": \"" + ex.getMessage() + "\"}");
-            //out.print(gson.toJson(ex.getMessage()));
+            out.print(gson.toJson(ex.getMessage()));
         } finally {
             out.flush();
             out.close();
