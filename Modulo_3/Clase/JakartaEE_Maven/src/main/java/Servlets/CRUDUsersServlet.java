@@ -16,7 +16,6 @@ import java.util.List;
 
 @WebServlet("/users")
 public class CRUDUsersServlet extends HttpServlet {
-
     //https://mvnrepository.com/artifact/com.google.code.gson/gson/2.9.1
     private Gson gson = new Gson();
     private static Context cnt = new Context();
@@ -129,6 +128,50 @@ public class CRUDUsersServlet extends HttpServlet {
             }
 
         } catch (Exception ex) {
+            resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.print(gson.toJson(ex.getMessage()));
+        } finally {
+            out.flush();
+            out.close();
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        PrintWriter out = resp.getWriter();
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
+        try {
+            String name = req.getParameter("name");
+            String lastName = req.getParameter("lastName");
+            String email = req.getParameter("email");
+
+            if (name != null && lastName != null && email != null) {
+                var result = cnt.users.stream().filter(usr -> (usr.getName() + usr.getLastName() + usr.getEmail()).toLowerCase().contains(name.toLowerCase() + lastName.toLowerCase() + email.toLowerCase())).toList();
+
+                if (result.isEmpty() == true) {
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                    out.print(gson.toJson("No se encontraron coincidencias con los parámetros de búsqueda proporcionados"));
+                } else if (result.size() > 1) {
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                    out.print(gson.toJson("{\"message\":\"Se encontró más de una coincidencia con los parámetros proporcionados.\",\"users\":" + gson.toJson(result) + "}"));
+                } else {
+                    cnt.users.remove(result.stream().findFirst().get());
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                    out.print(gson.toJson("El elemento se eliminó correctamente"));
+                }
+            } else {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                out.print(gson.toJson("Los parámetros de búsqueda no pueden ser null"));
+            }
+        } catch (
+                Exception ex) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             out.print(gson.toJson(ex.getMessage()));
         } finally {
