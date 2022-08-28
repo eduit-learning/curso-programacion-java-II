@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar usuario</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+<h3>Eliminar usuario</h3>
+
+<div class="px-5">
+    <div class="row mb-3">
+        <label for="name" class="col-form-label col-sm-2">ID del Usuario</label>
+        <div class="col-sm-4">
+            <input type="text" name="name" id="userID" class="form-control" disabled />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="name" class="col-form-label col-sm-2">Nombre</label>
+        <div class="col-sm-4">
+            <input type="text" name="name" id="name" class="form-control" disabled />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="lastName" class="col-form-label col-sm-2">Apellidos</label>
+        <div class="col-sm-4">
+            <input type="text" name="lastName" id="lastName" class="form-control" disabled />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="userName" class="col-form-label col-sm-2">Nombre de usuario (alias)</label>
+        <div class="col-sm-4">
+            <input type="text" name="userName" id="userName" class="form-control" disabled />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="email" class="col-form-label col-sm-2">Correo electrónico</label>
+        <div class="col-sm-4">
+            <input type="text" name="email" id="email" class="form-control" disabled />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div>
+            <button class="btn btn-danger" id="delete-button">Eliminar</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    var baseUrl = 'http://localhost:8080/JakartaEE_Maven';
+    document.addEventListener("DOMContentLoaded", function (event) {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+
+        getUser(params.userID)
+
+        document.getElementById('delete-button').addEventListener('click', () => {
+            deleteUser(params.userID);
+        });
+    });
+
+    function deleteUser(userID) {
+        var retVal = confirm(`¿Estás seguro que deseas eliminar al usuario con ID ${userID}?`);
+        if (retVal == true) {
+            const xhr = new XMLHttpRequest();
+            var queryString = '?userID=' + userID;
+            xhr.open('DELETE', `${baseUrl}/usersdb${queryString}`, true);
+
+            xhr.onload = (event) => {
+                var response = JSON.parse(xhr.responseText);
+                if (response.statusCode == 200) {
+                    alert(response.message);
+                    window.location.href = `${baseUrl}/User/ListUser.html`;
+                } else {
+                    messageLabel.style.color = "red";
+                    messageLabel.innerHTML = response.message;
+                }
+            };
+            xhr.onerror = (event) => {
+                alert('Ocurrió un error al intentar hacer la petición: ' + event.message);
+            }
+
+            xhr.send();
+        }
+    }
+
+    function getUser(searchCriteria) {
+        const xhr = new XMLHttpRequest();
+        var queryString = '?searchCriteria=' + searchCriteria;
+        xhr.open('GET', `${baseUrl}/usersdb${queryString}`, true);
+
+        xhr.onload = (event) => {
+            var response = JSON.parse(xhr.responseText);
+            if (response.statusCode == 200) {
+                if (response.content == null || response.content.lenght == 0) {
+                    alert(response.message);
+                } else {
+
+                    document.getElementById('userID').value = response.content[0].userID;
+                    document.getElementById('name').value = response.content[0].name;
+                    document.getElementById('lastName').value = response.content[0].lastName;
+                    document.getElementById('userName').value = response.content[0].userName;
+                    document.getElementById('email').value = response.content[0].email;
+                }
+            } else {
+                messageLabel.style.color = "red";
+                messageLabel.innerHTML = response.message;
+            }
+        };
+        xhr.onerror = (event) => {
+            alert('Ocurrió un error al intentar hacer la petición: ' + event.message);
+        }
+
+        xhr.send();
+    }
+</script>

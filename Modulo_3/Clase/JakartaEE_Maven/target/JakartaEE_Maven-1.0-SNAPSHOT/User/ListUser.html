@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear un nuevo usuario</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script type="text/javascript" src="../js/userFunctions.js"></script>
+</head>
+<body>
+<h3>Lista de usuarios</h3>
+
+<div class="px-5">
+    <div class="row mb-3">
+        <label for="searchCriteria" class="col-form-label col-sm-2">Criterio de búsqueda</label>
+        <div class="col-sm-4">
+            <input type="text" name="searchCriteria" id="searchCriteria" class="form-control">
+        </div>
+        <button class="btn btn-primary col-form-label col-sm-2" id="search-button">Buscar</button>
+    </div>
+    <label class="col-form-label" id="message-label"></label>
+</div>
+
+<div class="px-5">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID Ususario</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Correo electrónico</th>
+            <th scope="col">Nombre de usuario</th>
+            <th scope="col">País</th>
+            <th scope="col">Lenguajes de programación</th>
+            <th scope="col">Roles asignados</th>
+            <th scope="col">Idioma</th>
+            <th scope="col">Opciones</th>
+        </tr>
+        </thead>
+        <tbody id="user-list-body"></tbody>
+
+    </table>
+
+    <a class="col-form-label col-sm-2" href="http://localhost:8080/JakartaEE_Maven/User/CreateUser.html">Crear nuevo usuario</a>
+</div>
+</body>
+</html>
+
+<script>
+    var baseUrl = 'http://localhost:8080/JakartaEE_Maven';
+    document.addEventListener("DOMContentLoaded", function (event) {
+        getUsers();
+        document.getElementById('search-button').addEventListener('click', () => {
+            getUsers();
+        });
+    });
+
+    function getUsers() {
+        const xhr = new XMLHttpRequest();
+        searchCriteria = document.getElementById('searchCriteria').value;
+        searchCriteria = searchCriteria == null || searchCriteria == 'undefined' ? "" : searchCriteria;
+        var queryString = '?searchCriteria=' + searchCriteria;
+        xhr.open('GET', `${baseUrl}/usersdb${queryString}`, true);
+
+        xhr.onload = (event) => {
+            var messageLabel = document.getElementById('message-label');
+            var tbody = document.getElementById('user-list-body');
+            tbody.innerHTML = '';
+            var response = JSON.parse(xhr.responseText);
+
+            if (response.statusCode == 200) {
+                messageLabel.style.color = "green";
+                messageLabel.innerHTML = response.message;
+                response.content.forEach((item) => {
+                    var pl = 'No Definido!';
+                    var rol = 'No Definido!'
+                    if (item.programmingLanguages != 'undefined' && item.programmingLanguages != null) {
+                        item.programmingLanguages.forEach((plItem) => {
+                            pl = `<ul><li>${plItem}</li></ul>`
+                        });
+                    }
+
+                    if (item.roles != 'undefined' && item.roles != null) {
+                        item.roles.forEach((rlItem) => {
+                            rol = `<ul><li>${rlItem}</li></ul>`
+                        });
+                    }
+
+                    tbody.innerHTML += `<tr><td>${item.userID}</td><td>${item.name}</td><td>${item.lastName}</td>
+                    <td>${item.email}</td><td>${item.userName}</td>
+                    <td>${item.country == `undefined` || item.country == null ? `No Definido!` : item.country}</td>
+                    <td>${pl}</td><td>${rol}</td>
+                    <td>${item.language == `undefined` || item.language == null ? `No Definido!` : item.language}</td>
+                    <td><a href="${baseUrl}/User/DeleteUser.html?userID=${item.userID}">Eliminar usuario</a> <br/>
+                    <a href="${baseUrl}/User/UpdateUser.html?userID=${item.userID}">Actualizar usuario</a></td></tr>`
+                });
+                var timeout = window.setTimeout(function () {
+                    messageLabel.innerHTML = '';
+                    clearTimeout(timeout);
+                }, 10000);
+            } else {
+                messageLabel.style.color = "red";
+                messageLabel.innerHTML = response.message;
+            }
+        };
+
+        xhr.onerror = (event) => {
+            alert('Ocurrió un error al intentar hacer la petición: ' + event.message);
+        }
+
+        xhr.send();
+    }
+</script>
