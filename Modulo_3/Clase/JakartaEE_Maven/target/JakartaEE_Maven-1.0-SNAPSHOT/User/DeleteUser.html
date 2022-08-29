@@ -79,8 +79,7 @@
                     alert(response.message);
                     window.location.href = `${baseUrl}/User/ListUser.html`;
                 } else {
-                    messageLabel.style.color = "red";
-                    messageLabel.innerHTML = response.message;
+                    alert(response.message);
                 }
             };
             xhr.onerror = (event) => {
@@ -110,8 +109,7 @@
                     document.getElementById('email').value = response.content[0].email;
                 }
             } else {
-                messageLabel.style.color = "red";
-                messageLabel.innerHTML = response.message;
+                alert(response.message);
             }
         };
         xhr.onerror = (event) => {

@@ -11,7 +11,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,22 +61,16 @@ public class UserServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
 
         try {
-            String name = req.getParameter("name");
-            String lastName = req.getParameter("lastName");
-            String userName = req.getParameter("userName");
-            String password = req.getParameter("password");
-            String email = req.getParameter("email");
-            String country = req.getParameter("country");
-            String[] programmingLanguages = req.getParameterValues("programmingLanguages");
-            String[] roles = req.getParameterValues("roles");
-            String language = req.getParameter("language");
+            BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            String result = null;
+            while ((result = br.readLine()) != null) {
+                sb.append(result + "\n");
+            }
+            br.close();
 
-            User userSave = new User(rnd.nextInt(1, 999999999), name, lastName, email, password);
-            userSave.setLanguage(language);
-            userSave.setCountry(country);
-            userSave.setUserName(userName);
-            userSave.setProgrammingLanguages(programmingLanguages);
-            userSave.setRoles(roles);
+            User userSave = gson.fromJson(sb.toString(), User.class);
+            userSave.setUserID(rnd.nextInt(1, 999999999));
 
             var response = business.saveUser(userSave);
             resp.setStatus(response.getStatusCode());
