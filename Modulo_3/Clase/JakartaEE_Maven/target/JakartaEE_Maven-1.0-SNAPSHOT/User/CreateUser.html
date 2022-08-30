@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Crear un nuevo usuario</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style type="text/css">
+        .label-error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <h3>Crear un nuevo usuario</h3>
@@ -15,6 +21,7 @@
             <div class="col-sm-4">
                 <input type="text" name="name" id="name" class="form-control">
             </div>
+            <label id="name-message" class="col-form-label col-sm-6 label-error-message"></label>
         </div>
 
         <div class="row mb-3">
@@ -123,18 +130,6 @@
 
     });
 
-    /*
-     * String name = req.getParameter("name");
-            String lastName = req.getParameter("lastName");
-            String userName = req.getParameter("userName");
-            String password = req.getParameter("password");
-            String email = req.getParameter("email");
-            String country = req.getParameter("country");
-            String[] programmingLanguages = req.getParameterValues("programmingLanguages");
-            String[] roles = req.getParameterValues("roles");
-            String language = req.getParameter("language");
-     */
-
     function validateForm() {
         let form = document.getElementById('create-user-form');
         let data = {};
@@ -179,11 +174,15 @@
 
         xhr.onload = (event) => {
             var response = JSON.parse(xhr.responseText);
-            alert(response);
             if (response.statusCode == 200) {
-
+                alert(response.message);
             } else {
-
+                var errors = '';
+                response.errors.forEach((item) => {
+                    if (item.propertyName === 'name') {
+                        document.getElementById('name-message').innerHTML = item.propertyValue;
+                    }
+                });
             }
         };
         xhr.onerror = (event) => {
@@ -191,5 +190,4 @@
         }
         xhr.send(JSON.stringify(data));
     }
-
 </script>

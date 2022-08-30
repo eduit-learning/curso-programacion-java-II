@@ -84,7 +84,7 @@ public class UserBusiness {
                     context.users.add(userSave);
 
                     response.setContent(userSave);
-                    response.setMessage("El usuario se creó correctamente");
+                    response.setMessage("El usuario se actualizó correctamente");
                     response.setStatusCode(HttpServletResponse.SC_OK);
                 } else {
                     context.users.add(userSave);
