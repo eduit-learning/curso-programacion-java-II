@@ -29,6 +29,7 @@
             <div class="col-sm-4">
                 <input type="text" name="lastName" id="lastName" class="form-control">
             </div>
+            <label id="lastName-message" class="col-form-label col-sm-6 label-error-message"></label>
         </div>
 
         <div class="row mb-3">
@@ -36,6 +37,7 @@
             <div class="col-sm-4">
                 <input type="text" name="userName" id="userName" class="form-control">
             </div>
+            <label id="userName-message" class="col-form-label col-sm-6 label-error-message"></label>
         </div>
 
         <div class="row mb-3">
@@ -43,6 +45,7 @@
             <div class="col-sm-4">
                 <input type="text" name="email" id="email" class="form-control">
             </div>
+            <label id="email-message" class="col-form-label col-sm-6 label-error-message"></label>
         </div>
 
         <div class="row mb-3">
@@ -50,6 +53,7 @@
             <div class="col-sm-4">
                 <input type="password" name="password" id="password" class="form-control">
             </div>
+            <label id="password-message" class="col-form-label col-sm-6 label-error-message"></label>
         </div>
 
         <div class="row mb-3">
@@ -66,6 +70,7 @@
                     <option value="VE">Venezuela</option>
                 </select>
             </div>
+            <label id="country-message" class="col-form-label col-sm-6 label-error-message"></label>
         </div>
 
         <div class="row mb-3">
@@ -80,6 +85,7 @@
                     <option value="React">React</option>
                 </select>
             </div>
+            <label id="pl-message" class="col-form-label col-sm-6 label-error-message"></label>
         </div>
 
         <div class="row mb-3">
@@ -96,6 +102,7 @@
                 <input type="checkbox" name="roles" value="ROLE_MODERATOR" class="form-check-input">
                 <label class="form-check-label">Moderador</label>
             </div>
+            <label id="roles-message" class="col-form-label col-sm-4 label-error-message"></label>
         </div>
 
         <div class="row mb-3">
@@ -112,11 +119,13 @@
                 <input type="radio" name="language" value="fr" class="form-check-input">
                 <label class="form-check-label">Frances</label>
             </div>
+            <label id="language-message" class="col-form-label col-sm-4 label-error-message"></label>
         </div>
 
         <div class="row mb-3">
             <div>
                 <input type="submit" value="Guardar" class="btn btn-success">
+                <button class="btn btn-danger" id="cancel-button">Cancelar</button>
             </div>
         </div>
     </form>
@@ -127,16 +136,57 @@
 <script>
     var baseUrl = 'http://localhost:8080/JakartaEE_Maven';
     document.addEventListener("DOMContentLoaded", function (event) {
-
+        document.getElementById('cancel-button').addEventListener('click', function () {
+            var retVal = confirm('¿Estás seguro que deseas salir del proceso de captura?');
+            if (retVal == true) {
+                window.location.href = `${baseUrl}/User/ListUser.html`;
+            }
+        });
     });
 
     function validateForm() {
         let form = document.getElementById('create-user-form');
+        let data = getData(new FormData(form));
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `${baseUrl}/usersdb`, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onload = (event) => {
+            var response = JSON.parse(xhr.responseText);
+            if (response.statusCode >= 200 && response.statusCode <= 300) {
+                alert(response.message);
+                window.location.href = `${baseUrl}/User/ListUser.html`;
+            } else {
+                showErrors(response.errors);
+            }
+        };
+        xhr.onerror = (event) => {
+            alert('Ocurrió un error al intentar hacer la petición: ' + event.message);
+        }
+
+        cleanErrorLabels();
+        xhr.send(JSON.stringify(data));
+    }
+
+    function cleanErrorLabels() {
+        document.getElementById('name-message').innerHTML = '';
+        document.getElementById('lastName-message').innerHTML = '';
+        document.getElementById('userName-message').innerHTML = '';
+        document.getElementById('email-message').innerHTML = '';
+        document.getElementById('password-message').innerHTML = '';
+        document.getElementById('country-message').innerHTML = '';
+        document.getElementById('pl-message').innerHTML = '';
+        document.getElementById('roles-message').innerHTML = '';
+        document.getElementById('language-message').innerHTML = '';
+    }
+
+    function getData(formData) {
         let data = {};
         let planguages = [];
         let roles = [];
 
-        for (let [key, value] of new FormData(form)) {
+        for (let [key, value] of formData) {
             if (key == 'name') {
                 data.name = value;
             }
@@ -165,29 +215,42 @@
                 data.language = value;
             }
         }
+
         data.programmingLanguages = planguages;
         data.roles = roles;
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', `${baseUrl}/usersdb`, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
+        return data;
+    }
 
-        xhr.onload = (event) => {
-            var response = JSON.parse(xhr.responseText);
-            if (response.statusCode == 200) {
-                alert(response.message);
-            } else {
-                var errors = '';
-                response.errors.forEach((item) => {
-                    if (item.propertyName === 'name') {
-                        document.getElementById('name-message').innerHTML = item.propertyValue;
-                    }
-                });
+    function showErrors(errors) {
+        errors.forEach((item) => {
+            if (item.propertyName === 'name') {
+                document.getElementById('name-message').innerHTML = item.propertyValue;
             }
-        };
-        xhr.onerror = (event) => {
-            alert('Ocurrió un error al intentar hacer la petición: ' + event.message);
-        }
-        xhr.send(JSON.stringify(data));
+            if (item.propertyName === 'lastName') {
+                document.getElementById('lastName-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'userName') {
+                document.getElementById('userName-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'email') {
+                document.getElementById('email-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'password') {
+                document.getElementById('password-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'country') {
+                document.getElementById('country-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'programmingLanguages') {
+                document.getElementById('pl-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'roles') {
+                document.getElementById('roles-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'language') {
+                document.getElementById('language-message').innerHTML = item.propertyValue;
+            }
+        });
     }
 </script>

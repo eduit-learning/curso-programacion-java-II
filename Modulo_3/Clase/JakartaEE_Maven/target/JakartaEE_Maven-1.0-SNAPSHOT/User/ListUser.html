@@ -70,19 +70,22 @@
                 messageLabel.style.color = "green";
                 messageLabel.innerHTML = response.message;
                 response.content.forEach((item) => {
-                    var pl = 'No Definido!';
-                    var rol = 'No Definido!'
+                    var pl = '';
+                    var rol = ''
                     if (item.programmingLanguages != 'undefined' && item.programmingLanguages != null) {
                         item.programmingLanguages.forEach((plItem) => {
-                            pl = `<ul><li>${plItem}</li></ul>`
+                            pl += `<ul><li>${plItem}</li></ul>`
                         });
                     }
 
                     if (item.roles != 'undefined' && item.roles != null) {
                         item.roles.forEach((rlItem) => {
-                            rol = `<ul><li>${rlItem}</li></ul>`
+                            rol += `<ul><li>${rlItem}</li></ul>`
                         });
                     }
+
+                    pl = pl == '' ? 'No Definido!' : pl;
+                    rol = rol == '' ? 'No Definido!' : rol;
 
                     tbody.innerHTML += `<tr><td>${item.userID}</td><td>${item.name}</td><td>${item.lastName}</td>
                     <td>${item.email}</td><td>${item.userName}</td>
