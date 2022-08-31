@@ -91,6 +91,19 @@ public class UserServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
 
         try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            String result = null;
+            while ((result = br.readLine()) != null) {
+                sb.append(result + "\n");
+            }
+            br.close();
+
+            User userSave = gson.fromJson(sb.toString(), User.class);
+
+            var response = business.saveUser(userSave);
+            resp.setStatus(response.getStatusCode());
+            out.print(gson.toJson(response));
 
         } catch (Exception ex) {
             out.print(gson.toJson(new ServletResponse<User>(ex.getMessage(), null, HttpServletResponse.SC_INTERNAL_SERVER_ERROR)));

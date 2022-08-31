@@ -147,7 +147,125 @@
         const params = Object.fromEntries(urlSearchParams.entries());
 
         getUser(params.userID)
+
+        document.getElementById('cancel-button').addEventListener('click', function () {
+            var retVal = confirm('¿Estás seguro que deseas salir del proceso de captura?');
+            if (retVal == true) {
+                window.location.href = `${baseUrl}/User/ListUser.html`;
+            }
+        });
     });
+
+    function validateForm() {
+        let form = document.getElementById('create-user-form');
+        let data = getData(new FormData(form));
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', `${baseUrl}/usersdb`, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onload = (event) => {
+            var response = JSON.parse(xhr.responseText);
+            if (response.statusCode >= 200 && response.statusCode <= 300) {
+                alert(response.message);
+                window.location.href = `${baseUrl}/User/ListUser.html`;
+            } else {
+                showErrors(response.errors);
+            }
+        };
+        xhr.onerror = (event) => {
+            alert('Ocurrió un error al intentar hacer la petición: ' + event.message);
+        }
+
+        cleanErrorLabels();
+        xhr.send(JSON.stringify(data));
+    }
+
+    function cleanErrorLabels() {
+        document.getElementById('name-message').innerHTML = '';
+        document.getElementById('lastName-message').innerHTML = '';
+        document.getElementById('userName-message').innerHTML = '';
+        document.getElementById('email-message').innerHTML = '';
+        document.getElementById('password-message').innerHTML = '';
+        document.getElementById('country-message').innerHTML = '';
+        document.getElementById('pl-message').innerHTML = '';
+        document.getElementById('roles-message').innerHTML = '';
+        document.getElementById('language-message').innerHTML = '';
+    }
+
+    function getData(formData) {
+        let data = {};
+        let planguages = [];
+        let roles = [];
+
+        for (let [key, value] of formData) {
+            if (key == 'name') {
+                data.name = value;
+            }
+            if (key == 'lastName') {
+                data.lastName = value;
+            }
+            if (key == 'userName') {
+                data.userName = value;
+            }
+            if (key == 'password') {
+                data.password = value;
+            }
+            if (key == 'email') {
+                data.email = value;
+            }
+            if (key == 'country') {
+                data.country = value;
+            }
+            if (key == 'programmingLanguages') {
+                planguages.push(value);
+            }
+            if (key == 'roles') {
+                roles.push(value);
+            }
+            if (key == 'language') {
+                data.language = value;
+            }
+        }
+
+        data.userID = document.getElementById('userID').value;
+        data.programmingLanguages = planguages;
+        data.roles = roles;
+
+        return data;
+    }
+
+    function showErrors(errors) {
+        errors.forEach((item) => {
+            if (item.propertyName === 'name') {
+                document.getElementById('name-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'lastName') {
+                document.getElementById('lastName-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'userName') {
+                document.getElementById('userName-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'email') {
+                document.getElementById('email-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'password') {
+                document.getElementById('password-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'country') {
+                document.getElementById('country-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'programmingLanguages') {
+                document.getElementById('pl-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'roles') {
+                document.getElementById('roles-message').innerHTML = item.propertyValue;
+            }
+            if (item.propertyName === 'language') {
+                document.getElementById('language-message').innerHTML = item.propertyValue;
+            }
+        });
+    }
 
     function getUser(searchCriteria) {
         const xhr = new XMLHttpRequest();
