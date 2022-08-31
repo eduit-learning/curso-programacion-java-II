@@ -2,9 +2,203 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Crear un nuevo usuario</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style type="text/css">
+        .label-error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+<h3>Crear un nuevo usuario</h3>
 
+<div class="px-5">
+    <form onsubmit="event.preventDefault(); validateForm();" id="create-user-form">
+        <div class="row mb-3">
+            <label for="userID" class="col-form-label col-sm-2">ID del Usuario</label>
+            <div class="col-sm-4">
+                <input type="text" name="userID" id="userID" class="form-control" disabled />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="name" class="col-form-label col-sm-2">Nombre</label>
+            <div class="col-sm-4">
+                <input type="text" name="name" id="name" class="form-control">
+            </div>
+            <label id="name-message" class="col-form-label col-sm-6 label-error-message"></label>
+        </div>
+
+        <div class="row mb-3">
+            <label for="lastName" class="col-form-label col-sm-2">Apellidos</label>
+            <div class="col-sm-4">
+                <input type="text" name="lastName" id="lastName" class="form-control">
+            </div>
+            <label id="lastName-message" class="col-form-label col-sm-6 label-error-message"></label>
+        </div>
+
+        <div class="row mb-3">
+            <label for="userName" class="col-form-label col-sm-2">Nombre de usuario (alias)</label>
+            <div class="col-sm-4">
+                <input type="text" name="userName" id="userName" class="form-control">
+            </div>
+            <label id="userName-message" class="col-form-label col-sm-6 label-error-message"></label>
+        </div>
+
+        <div class="row mb-3">
+            <label for="email" class="col-form-label col-sm-2">Correo electrónico</label>
+            <div class="col-sm-4">
+                <input type="text" name="email" id="email" class="form-control">
+            </div>
+            <label id="email-message" class="col-form-label col-sm-6 label-error-message"></label>
+        </div>
+
+        <div class="row mb-3">
+            <label for="password" class="col-form-label col-sm-2">Contraseña</label>
+            <div class="col-sm-4">
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <label id="password-message" class="col-form-label col-sm-6 label-error-message"></label>
+        </div>
+
+        <div class="row mb-3">
+            <label for="country" class="col-form-label col-sm-2">País</label>
+            <div class="col-sm-4">
+                <select name="country" id="country" class="form-select">
+                    <option value="" selected>-- Seleccionar --</option>
+                    <option value="MX">México</option>
+                    <option value="ES">España</option>
+                    <option value="CL">Chile</option>
+                    <option value="AR">Argentina</option>
+                    <option value="PE">Perú</option>
+                    <option value="CO">Colombia</option>
+                    <option value="VE">Venezuela</option>
+                </select>
+            </div>
+            <label id="country-message" class="col-form-label col-sm-6 label-error-message"></label>
+        </div>
+
+        <div class="row mb-3">
+            <label for="programmingLanguages" class="col-form-label col-sm-2">Lenguajes de programación</label>
+            <div class="col-sm-4">
+                <select name="programmingLanguages" id="programmingLanguages" multiple class="form-select">
+                    <option value="Java">Java SE</option>
+                    <option value="Jakarta EE">Jakarta EE 9</option>
+                    <option value="Spring">Spring Boot</option>
+                    <option value="JS">JavaScript</option>
+                    <option value="Angular">Angular</option>
+                    <option value="React">React</option>
+                </select>
+            </div>
+            <label id="pl-message" class="col-form-label col-sm-6 label-error-message"></label>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-form-label col-sm-2">Roles</label>
+            <div class="form-check col-sm-2">
+                <input type="checkbox" name="roles" value="ROLE_ADMIN" class="form-check-input">
+                <label class="form-check-label">Administrador</label>
+            </div>
+            <div class="form-check col-sm-2">
+                <input type="checkbox" name="roles" value="ROLE_USER" class="form-check-input">
+                <label class="form-check-label">Usuario</label>
+            </div>
+            <div class="form-check col-sm-2">
+                <input type="checkbox" name="roles" value="ROLE_MODERATOR" class="form-check-input">
+                <label class="form-check-label">Moderador</label>
+            </div>
+            <label id="roles-message" class="col-form-label col-sm-4 label-error-message"></label>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-form-label col-sm-2">Idiomas</label>
+            <div class="form-check col-sm-2">
+                <input type="radio" name="language" value="es" class="form-check-input">
+                <label class="form-check-label">Español</label>
+            </div>
+            <div class="form-check col-sm-2">
+                <input type="radio" name="language" value="en" class="form-check-input">
+                <label class="form-check-label">Inglés</label>
+            </div>
+            <div class="form-check col-sm-2">
+                <input type="radio" name="language" value="fr" class="form-check-input">
+                <label class="form-check-label">Frances</label>
+            </div>
+            <label id="language-message" class="col-form-label col-sm-4 label-error-message"></label>
+        </div>
+
+        <div class="row mb-3">
+            <div>
+                <input type="submit" value="Guardar" class="btn btn-success">
+                <button class="btn btn-danger" id="cancel-button">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>
+
+<script>
+    var baseUrl = 'http://localhost:8080/JakartaEE_Maven';
+    document.addEventListener("DOMContentLoaded", function (event) {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+
+        getUser(params.userID)
+    });
+
+    function getUser(searchCriteria) {
+        const xhr = new XMLHttpRequest();
+        var queryString = '?searchCriteria=' + searchCriteria;
+        xhr.open('GET', `${baseUrl}/usersdb${queryString}`, true);
+
+        xhr.onload = (event) => {
+            var response = JSON.parse(xhr.responseText);
+            if (response.statusCode == 200) {
+                if (response.content == null || response.content.lenght == 0) {
+                    alert(response.message);
+                } else {
+                    document.getElementById('userID').value = response.content[0].userID;
+                    document.getElementById('name').value = response.content[0].name;
+                    document.getElementById('lastName').value = response.content[0].lastName;
+                    document.getElementById('userName').value = response.content[0].userName;
+                    document.getElementById('email').value = response.content[0].email;
+                    document.getElementById('country').value = response.content[0].country
+                    var plOptions = document.getElementById('programmingLanguages').options;
+                    for (const op of plOptions) {
+                        if (response.content[0].programmingLanguages != 'undefined' &&
+                            response.content[0].programmingLanguages != null &&
+                            response.content[0].programmingLanguages.some(pl => pl === op.value)) {
+                            op.selected = true;
+                        } else {
+                            op.selected = false;
+                        }
+                    }
+                    var chb = document.querySelectorAll('input[type=checkbox]');
+                    for (const cb of chb) {
+                        if (response.content[0].roles != 'undefined' &&
+                            response.content[0].roles != null &&
+                            response.content[0].roles.some(c => c === cb.value)) {
+                            cb.checked = true;
+                        }
+                        else {
+                            cb.checked = false;
+                        }
+                    }
+
+                    document.querySelector('input[type=radio][value=' + response.content[0].language + ']').checked = true;
+
+                }
+            } else {
+                alert(response.message);
+            }
+        };
+        xhr.onerror = (event) => {
+            alert('Ocurrió un error al intentar hacer la petición: ' + event.message);
+        }
+
+        xhr.send();
+    }
+</script>
