@@ -9,7 +9,6 @@
             color: red;
             font-weight: bold;
         }
-
     </style>
 </head>
 <body>
@@ -138,18 +137,34 @@
     var baseUrl = 'http://localhost:8080/JakartaEE_Maven';
     document.addEventListener("DOMContentLoaded", function (event) {
         document.getElementById('cancel-button').addEventListener('click', function () {
+            validateForm(true)
             var retVal = confirm('¿Estás seguro que deseas salir del proceso de captura?');
             if (retVal == true) {
                 window.location.href = `${baseUrl}/User/ListUser.html`;
             }
         });
+
+        let cookies = document.cookie.replace(' ', '').split(';');
+        let nameTempSave = cookies.some((element, index, array) => {
+            return element.includes('tempSave=');
+        });
+
+        if (nameTempSave === true) {
+            var retVal = confirm('Hay valores guardados de tu última creación. ¿Deseas recuperarlos?');
+            if (retVal == true) {
+                document.getElementById('name').value = cookies.filter((element, index, array) => element.includes('tempSave='))[0].replace('tempSave=', '')
+            }
+        }
     });
 
-    function validateForm() {
+    function validateForm(isCancel) {
         let form = document.getElementById('create-user-form');
         let data = getData(new FormData(form));
 
         const xhr = new XMLHttpRequest();
+        if (isCancel == true) {
+            data.isCancel = true;
+        }
         xhr.open('POST', `${baseUrl}/usersdb`, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
 
@@ -160,6 +175,10 @@
                 window.location.href = `${baseUrl}/User/ListUser.html`;
             } else {
                 showErrors(response.errors);
+                if (response.statusCode == 401) {
+                    alert(response.message);
+                    window.location.href = `${baseUrl}/User/Login.html`;
+                }
             }
         };
         xhr.onerror = (event) => {
@@ -254,5 +273,4 @@
             }
         });
     }
-
 </script>

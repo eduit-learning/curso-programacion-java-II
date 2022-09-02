@@ -171,6 +171,10 @@
                 window.location.href = `${baseUrl}/User/ListUser.html`;
             } else {
                 showErrors(response.errors);
+                if (response.statusCode == 401) {
+                    alert(response.message);
+                    window.location.href = `${baseUrl}/User/Login.html`;
+                }
             }
         };
         xhr.onerror = (event) => {
@@ -311,6 +315,10 @@
                 }
             } else {
                 alert(response.message);
+                if (response.statusCode == 401) {
+                    alert(response.message);
+                    window.location.href = `${baseUrl}/User/Login.html`;
+                }
             }
         };
         xhr.onerror = (event) => {

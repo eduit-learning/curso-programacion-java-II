@@ -39,7 +39,10 @@
 
     </table>
 
-    <a class="col-form-label col-sm-2" href="http://localhost:8080/JakartaEE_Maven/User/CreateUser.html">Crear nuevo usuario</a>
+    <a class="col-form-label col-sm-2" href="http://localhost:8080/JakartaEE_Maven/User/CreateUser.html">
+        Crear nuevo
+        usuario
+    </a>
 </div>
 </body>
 </html>
@@ -102,6 +105,10 @@
             } else {
                 messageLabel.style.color = "red";
                 messageLabel.innerHTML = response.message;
+                if (response.statusCode == 401) {
+                    alert(response.message);
+                    window.location.href = `${baseUrl}/User/Login.html`;
+                }
             }
         };
 
@@ -111,4 +118,5 @@
 
         xhr.send();
     }
+
 </script>

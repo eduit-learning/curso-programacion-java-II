@@ -55,11 +55,11 @@ public class LoginBusiness {
                 Si se pone 0 expira inmediatamanete y se elimina de forma automática
                 El parámetro se indica siempre en segundos
             */
-            loginCookie.setMaxAge(3600);//Espira en 1 hora
+            loginCookie.setMaxAge(10800);//Espira en 1 hora
             resp.addCookie(loginCookie);
 
             loginCookie = new Cookie(COOKIE_USER_NAME, user.getName());
-            loginCookie.setMaxAge(3600);//Espira en 1 hora
+            loginCookie.setMaxAge(10800);//Espira en 1 hora
             resp.addCookie(loginCookie);
 
             return new ServletResponse<Boolean>("Bienvenido " + user.getName() + " " + user.getLastName(), true, HttpServletResponse.SC_OK);
