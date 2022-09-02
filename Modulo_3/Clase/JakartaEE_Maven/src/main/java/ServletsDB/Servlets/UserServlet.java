@@ -8,10 +8,7 @@ import ServletsDB.Repository.StaticContext;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,8 +37,6 @@ public class UserServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        var sessions = req.getSession();
-        sessions.setAttribute("", new Object());
 
         try {
             var cookies = req.getCookies();
@@ -91,6 +86,15 @@ public class UserServlet extends HttpServlet {
                     Cookie cancelCookie = new Cookie("tempSave", userSave.getName());
                     cancelCookie.setMaxAge(3600);
                     resp.addCookie(cancelCookie);
+                    /*
+                    HttpSession session = req.getSession();
+                    session.setAttribute("tempSave", new Object());//Para guardar un objeto
+                    var sessionObj = session.getAttribute("tempSave");//Obtener un objeto
+                    session.removeAttribute("tempSave");//Elimina el objeto de la sesión
+                    session.invalidate();//Invalida toda la sesión actual del cliente, borra todo
+                    session.setMaxInactiveInterval(3600);//Inidca cuál es el tiempo de expiración (en segundos) de la sesión. De forma predeterminada son 30 minutos
+                    */
+
                 } else {
                     userSave.setUserID(rnd.nextInt(1, 999999999));
                     var response = business.saveUser(userSave);
