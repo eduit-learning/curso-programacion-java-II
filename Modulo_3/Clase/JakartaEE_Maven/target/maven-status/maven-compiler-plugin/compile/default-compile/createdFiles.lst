@@ -1,8 +1,10 @@
 EJBs\ServiceEJB.class
 EJBs\ServiceEjbRemote.class
+JAX_WS\Interfaces\IServiceJAXWS.class
 ServletsDB\Servlets\JSPFORM.class
 ServletsDB\Servlets\LoginServlet.class
 ServletsDB\Repository\StaticContext.class
+JAX_WS\ServiceJAXWS.class
 EJBs\Interfaces\IServiceEjbRemote.class
 Servlets\Repository\Context.class
 ServletsDB\Models\User.class
@@ -15,4 +17,5 @@ ServletsDB\Models\ServletResponse.class
 ServletsDB\Models\ErrorKeyValuePair.class
 EJBs\Interfaces\IServiceEjbLocal.class
 ServletsDB\Servlets\UserServlet.class
+JAX_RS\ServiceJAXRS.class
 Servlets\CRUDUsersServlet.class
