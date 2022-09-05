@@ -86,14 +86,23 @@ public class UserServlet extends HttpServlet {
                     Cookie cancelCookie = new Cookie("tempSave", userSave.getName());
                     cancelCookie.setMaxAge(3600);
                     resp.addCookie(cancelCookie);
-                    /*
+                    /* Este bloque de código elimina todas las cookies
+                    for (var cookie : req.getCookies()) {
+                        cookie.setMaxAge(0);
+                    }*/
+                    //La siguiente línea de código elimina solo la cookie con nombre "tempSave"
+                    //Arrays.stream(req.getCookies()).filter(c->c.getName().equals("tempSave")).findFirst().get().setMaxAge(0);
+
                     HttpSession session = req.getSession();
                     session.setAttribute("tempSave", new Object());//Para guardar un objeto
                     var sessionObj = session.getAttribute("tempSave");//Obtener un objeto
                     session.removeAttribute("tempSave");//Elimina el objeto de la sesión
                     session.invalidate();//Invalida toda la sesión actual del cliente, borra todo
                     session.setMaxInactiveInterval(3600);//Inidca cuál es el tiempo de expiración (en segundos) de la sesión. De forma predeterminada son 30 minutos
-                    */
+
+                    //por ejemplo para cerrar la sesión y eliminar todas las variables de sesión al mismo tiempo
+                    HttpSession sessionLo = req.getSession();
+                    sessionLo.invalidate();
 
                 } else {
                     userSave.setUserID(rnd.nextInt(1, 999999999));
