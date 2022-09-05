@@ -1,6 +1,10 @@
 package ServletsDB.Models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+
+    static final long serialVersionUID = 420989823979842L;
     private int userID;
     private String name;
     private String lastName;
