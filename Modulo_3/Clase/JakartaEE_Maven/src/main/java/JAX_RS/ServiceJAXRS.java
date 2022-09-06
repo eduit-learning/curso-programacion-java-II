@@ -1,8 +1,12 @@
 package JAX_RS;
 
 import ServletsDB.Models.User;
+import ServletsDB.Models.UserDB;
+import ServletsDB.Repository.EntityManagerContext;
 import ServletsDB.Repository.StaticContext;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -13,12 +17,15 @@ import java.util.List;
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 public class ServiceJAXRS {
+
     @GET
     @Path("/get-all-users")
     public Response getUsers() {
         try {
-            return Response.ok(new StaticContext().users).build();
+            EntityManager em = EntityManagerContext.getEntityManagerContext();
+            return Response.ok(em.createQuery("select u from UserDB u left outer join fetch u.role", UserDB.class).getResultList()).build();
         } catch (Exception ex) {
+            ex.printStackTrace();
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -28,11 +35,9 @@ public class ServiceJAXRS {
     public Response getUser(@PathParam("userID") int userID) {
         try {
             StaticContext sc = new StaticContext();
-            if (sc.users.stream().anyMatch(u -> u.getUserID() == userID) == true) {
-                return Response.ok(sc.users.stream().filter(u -> u.getUserID() == userID).findFirst().get()).build();
-            }
+            EntityManager em = EntityManagerContext.getEntityManagerContext();
+            return Response.ok(em.find(UserDB.class, userID)).build();
 
-            return Response.status(Response.Status.NO_CONTENT).build();
         } catch (Exception ex) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
@@ -43,6 +48,12 @@ public class ServiceJAXRS {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(User newUser) {
         try {
+            EntityManager em = EntityManagerContext.getEntityManagerContext();
+            if (newUser.getUserID() > 0) {
+                em.merge(newUser);
+            } else {
+                em.persist(newUser);
+            }
             return Response.ok("El usuario se creó correctamente").build();
         } catch (Exception ex) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -54,6 +65,12 @@ public class ServiceJAXRS {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateUser(@PathParam("userID") int userID, User newUser) {
         try {
+            EntityManager em = EntityManagerContext.getEntityManagerContext();
+            if (newUser.getUserID() > 0) {
+                em.merge(newUser);
+            } else {
+                em.persist(newUser);
+            }
             return Response.ok("El usuario se actualizó correctamente").build();
         } catch (Exception ex) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

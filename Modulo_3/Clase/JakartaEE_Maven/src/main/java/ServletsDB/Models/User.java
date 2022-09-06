@@ -1,19 +1,40 @@
 package ServletsDB.Models;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
+
 
 public class User implements Serializable {
 
     static final long serialVersionUID = 420989823979842L;
+
+    @Id
+    @Column(name = "userID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "lastName")
     private String lastName;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "userName")
     private String userName;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "country")
     private String country;
     private String[] programmingLanguages;
     private String[] roles;
+
+    @Column(name = "language")
     private String language;
 
     public User() {

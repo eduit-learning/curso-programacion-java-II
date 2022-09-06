@@ -1,7 +1,10 @@
 package EJBs;
 
 import EJBs.Interfaces.IServiceEjbLocal;
+import jakarta.ejb.Stateful;
 import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 @Stateless
 //@Stateful
