@@ -9,13 +9,15 @@ import java.util.ArrayList;
 
 @Stateless
 public class ServiceEjbRemote implements IServiceEjbRemote {
+    private StaticContext st = new StaticContext();
     @Override
     public ArrayList<User> getUsers() {
-        return new StaticContext().users;
+        return st.users;
     }
 
     @Override
     public boolean createUser(User newUser) {
-        return false;
+        st.users.add(newUser);
+        return true;
     }
 }

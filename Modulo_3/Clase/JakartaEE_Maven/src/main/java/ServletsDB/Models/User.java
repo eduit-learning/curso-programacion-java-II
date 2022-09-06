@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 
-
 public class User implements Serializable {
 
-    static final long serialVersionUID = 420989823979842L;
+    static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "userID")

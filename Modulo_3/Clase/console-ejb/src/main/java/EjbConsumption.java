@@ -8,8 +8,6 @@ import java.util.Properties;
 
 public class EjbConsumption {
     public static void main(String[] args) throws NamingException {
-
-
         final Properties env = new Properties();
         env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
         env.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
