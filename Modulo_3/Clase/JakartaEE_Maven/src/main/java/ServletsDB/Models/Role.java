@@ -51,11 +51,11 @@ public class Role {
         this.description = description;
     }
 
-    //public List<UserDB> getUsers() {
-        //return users;
-    //}
+    public List<UserDB> getUsers() {
+        return users;
+    }
 
-    //public void setUsers(List<UserDB> users) {
-        //this.users = users;
-    //}
+    public void setUsers(List<UserDB> users) {
+        this.users = users;
+    }
 }

@@ -13,13 +13,17 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
+
+//http://[dominio]/api/[path clase]/[path operacion/método]
+//http://localhost:8080/api/users-eduit/
 @RequestScoped
-@Path("/users")
+@Path("/users-eduit")
 @Produces(MediaType.APPLICATION_JSON)
 public class ServiceJAXRS {
 
-    @GET
-    @Path("/get-all-users")
+    //http://localhost:8080/api/users-eduit/get-all-users-eduit
+    @GET//Sin Path la petición a esta operación sería: http://localhost:8080/JakartaEE_Maven/api/users/getUsers
+    @Path("/get-all-users-eduit")//Con Path la petición a esta operación sería: http://localhost:8080/JakartaEE_Maven/api/users/get-all-users
     public Response getUsers() {
         try {
             EntityManager em = EntityManagerContext.getEntityManagerContext();
@@ -30,6 +34,7 @@ public class ServiceJAXRS {
         }
     }
 
+    //http://localhost:8080/api/users-eduit/get-user/[id del usuario]
     @GET
     @Path("/get-user/{userID}")
     public Response getUser(@PathParam("userID") int userID) {
@@ -43,6 +48,7 @@ public class ServiceJAXRS {
         }
     }
 
+    //http://localhost:8080/api/users-eduit/create-user
     @POST
     @Path("/create-user")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -60,6 +66,7 @@ public class ServiceJAXRS {
         }
     }
 
+    //http://localhost:8080/api/users-eduit/update-user/[id del usuario]
     @PUT
     @Path("/update-user/{userID}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -77,6 +84,7 @@ public class ServiceJAXRS {
         }
     }
 
+    //http://localhost:8080/api/users-eduit/delete-user/[id del usuario]
     @DELETE
     @Path("/delete-user/{userID}")
     public Response deleteUser(@PathParam("userID") int userID) {
