@@ -13,7 +13,8 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 
-
+//A los métodos/actions/Operations de un servico REST no se les puede llamar APIs. La API es como tal la clase que los contiene.
+//Es decir el servicio REST.
 //http://[dominio]/api/[path clase]/[path operacion/método]
 //http://localhost:8080/api/users-eduit/
 @RequestScoped
@@ -21,9 +22,40 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class ServiceJAXRS {
 
+    @GET
+    @Path("/getrole")
+    public Response getRole() {
+        return null;
+    }
+
+    @GET
+    @Path("/getrole/{roleID}")
+    public Response getRole(@PathParam("roleID") int roleID) {
+        return null;
+    }
+
+    @GET
+    @Path("/getrole/name/{name}")
+    public Response getRole(@PathParam("name") String name) {
+        return null;
+    }
+
+    @GET
+    @Path("/x/y/{description}")
+    public Response getRoleD(@PathParam("description") String description) {
+        return null;
+    }
+
+    @GET
+    @Path("/getrole/{name}/{description}")
+    public Response getRole(@PathParam("name") String name, @PathParam("description") String description) {
+        return null;
+    }
+
     //http://localhost:8080/api/users-eduit/get-all-users-eduit
-    @GET//Sin Path la petición a esta operación sería: http://localhost:8080/JakartaEE_Maven/api/users/getUsers
-    @Path("/get-all-users-eduit")//Con Path la petición a esta operación sería: http://localhost:8080/JakartaEE_Maven/api/users/get-all-users
+    @GET//Sin Path la petición a esta operación sería: http://localhost:8080/JakartaEE_Maven/api/users-eduit/getUsers
+    @Path("/get-all-users")
+//Con Path la petición a esta operación sería: http://localhost:8080/JakartaEE_Maven/api/users/get-all-users
     public Response getUsers() {
         try {
             EntityManager em = EntityManagerContext.getEntityManagerContext();
@@ -52,13 +84,17 @@ public class ServiceJAXRS {
     @POST
     @Path("/create-user")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createUser(User newUser) {
+    public Response createUser(UserDB newUser) {
         try {
             EntityManager em = EntityManagerContext.getEntityManagerContext();
             if (newUser.getUserID() > 0) {
+                em.getTransaction().begin();
                 em.merge(newUser);
+                em.getTransaction().commit();
             } else {
+                em.getTransaction().begin();
                 em.persist(newUser);
+                em.getTransaction().commit();
             }
             return Response.ok("El usuario se creó correctamente").build();
         } catch (Exception ex) {
@@ -70,13 +106,17 @@ public class ServiceJAXRS {
     @PUT
     @Path("/update-user/{userID}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateUser(@PathParam("userID") int userID, User newUser) {
+    public Response updateUser(@PathParam("userID") int userID, UserDB newUser) {
         try {
             EntityManager em = EntityManagerContext.getEntityManagerContext();
             if (newUser.getUserID() > 0) {
+                em.getTransaction().begin();
                 em.merge(newUser);
+                em.getTransaction().commit();
             } else {
+                em.getTransaction().begin();
                 em.persist(newUser);
+                em.getTransaction().commit();
             }
             return Response.ok("El usuario se actualizó correctamente").build();
         } catch (Exception ex) {
