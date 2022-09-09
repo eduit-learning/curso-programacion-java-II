@@ -15,7 +15,8 @@ import java.util.List;
 
 //A los métodos/actions/Operations de un servico REST no se les puede llamar APIs. La API es como tal la clase que los contiene.
 //Es decir el servicio REST.
-//http://[dominio]/api/[path clase]/[path operacion/método]
+//http://[dominio]/[nombre del projecto]/api/[path clase]/[path operacion/método]
+//http://[dominio]/[nombre del projecto]/[configuración web.xml]/[path clase]/[path operacion/método]
 //http://localhost:8080/api/users-eduit/
 @RequestScoped
 @Path("/users-eduit")
@@ -71,10 +72,22 @@ public class ServiceJAXRS {
     @Path("/get-user/{userID}")
     public Response getUser(@PathParam("userID") int userID) {
         try {
-            StaticContext sc = new StaticContext();
             EntityManager em = EntityManagerContext.getEntityManagerContext();
             return Response.ok(em.find(UserDB.class, userID)).build();
 
+        } catch (Exception ex) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    //http://loccalhost:8080/JakartaEE_Maven/api/users-eduit/get-user/name/Abraham
+    @GET
+    @Path("/get-user/name/{searchCriteria}")
+    public Response getUser(@PathParam("searchCriteria") String searchCriteria) {
+        try {
+            EntityManager em = EntityManagerContext.getEntityManagerContext();
+            //return Response.ok(em.createQuery("select u from UserDB u left outer join fetch u.role where u.name like '%" + searchCriteria + "%'", UserDB.class).getResultList()).build();
+            return Response.ok(em.createQuery("select u from UserDB u left outer join fetch u.role where u.name like :sc", UserDB.class).setParameter("sc", "%" + searchCriteria + "%").getResultList()).build();
         } catch (Exception ex) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }

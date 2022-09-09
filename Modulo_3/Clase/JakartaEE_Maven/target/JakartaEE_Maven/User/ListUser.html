@@ -62,6 +62,7 @@
         searchCriteria = searchCriteria == null || searchCriteria == 'undefined' ? "" : searchCriteria;
         var queryString = '?searchCriteria=' + searchCriteria;
         xhr.open('GET', `${baseUrl}/usersdb${queryString}`, true);
+        //xhr.open('GET', 'http://localhost:8080/JakartaEE_Maven/api/users/get-user/' + searchCriteria, true)
 
         xhr.onload = (event) => {
             var messageLabel = document.getElementById('message-label');
