@@ -8,6 +8,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>jakarta.ws.rs.core.Application</servlet-name>
-        <url-pattern>/api/*</url-pattern>
+        <url-pattern>/vw/api/*</url-pattern>
     </servlet-mapping>
 </web-app>
