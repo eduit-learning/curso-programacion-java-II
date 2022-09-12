@@ -1,0 +1,6 @@
+# Laboratorio - Aplicación final
+Durante las sesiones virtuales de este curso, se estuvo desarrollando la funcionalidad para operar con “Usuarios”, creando las diferentes vistas para la consulta, creación, actualización y eliminación de esta entidad. También, durante los laboratorios se creó la funcionalidad para operar con la entidad “Departamentos”, los diferentes laboratorios solicitaron la creación de las vistas y funcionalidad para la consulta, creación, actualización y eliminación.
+
+En este proyecto final, el estudiante debe validar y completar la funcionalidad de ambas entidades, las vistas deben estar desarrolladas en Angular, y la parte del backend para la operación de las entidades debe tener las 4 capas principales; servicio, capa de negocio, acceso a datos y modelo, para el caso del acceso a datos debe estar implementada utilizando EJBs.
+
+Como parte final, el estudiante debe establecer la relación entre las entidades “Usuario” y “Departamento” donde los usuarios pueden pertenecer a 1 o más departamentos y los departamentos pueden tener 1 o más usuarios asociados. Esto también debe estar reflejado en la vista, de tal forma que permita al usuario final operar con ambas entidades relacionadas.

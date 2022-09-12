@@ -1,27 +1,23 @@
-# Laboratorio Módulo 1
-Este laboratorio busca que el alumno ponga en práctica lo estudiado en el módulo 1 “Resumen Java Basics”. Está conformado de 2 secciones; laboratorio práctico y evaluación.
+# Laboratorio Módulo 3
+Este laboratorio busca que el alumno ponga en práctica lo estudiado en el módulo 3 “Jakarta EE API Servlet”. Está conformado de 2 secciones; laboratorio práctico y evaluación.
 
-## Laboratorio práctico – Contador de palabras
-Desarrollar una aplicación de consola que lea el contenido de un archivo de texto e imprima la cantidad de palabras que tiene, así como la cantidad de letras (no debe incluir espacios). La aplicación debe solicitar al usuario la ruta donde se encuentra el archivo, la aplicación debe ser capaz de leer archivos con cualquier cantidad de texto.
-
-Ejemplo:
-Texto en el archivo: “Hola alumnos del Curso de Java a la medida II”
-Total de palabras: 10
-Total de letras: 36
+## Laboratorio práctico
+Desarrollar un Servlet con las 4 operaciones (GET, POST, PUT y DELETE) que permita operar un objeto “Departamento”. Debido a que el Servlet tendrá las 4 operaciones, se debe poder obtener, actualizar, insertar y/o eliminar un departamento. No es necesario realizar la parte gráfica de este ejercicio, las pruebas puedes hacerse con Postman.
 
 ## Evaluación:
-1.	¿Cuál es la diferencia entre Value Types y Reference Types?
+1.	¿Qué es un API Servlet?
 
-2.	¿Cuáles son los tipos primitivos de datos en Java?
+2.	¿Cuántas operaciones puede tener un Servlet?
 
-3.	¿Para qué sirve la interface Comparable<>?
+3.	¿Cómo elimino una cookie de un Servlet?
 
-4.	¿Cuándo es necesario sobrescribir el método “equals” de una clase?
+4.	¿Cómo elimino todos los atributos de una sesión de un Servlet?
 
-5.	¿Para qué sirven los tipos de datos genéricos en Java?
+5.	¿Cuál es la diferencia entre una cookie y un atributo de sesión?
 
-6.	¿Por qué cuando sobrescribes el método “equals” se recomienda sobrescribir también el método “hashCode”?
+6.	¿Cuánto tiempo vive una cookie de forma predeterminada?
 
-7.	¿Cuál es la mejor práctica en el manejo de excepciones?
+7.	¿Cuánto tiempo viven los atributos de una sesión de forma predeterminada?
 
-8.	Cuando trabajas con hilos ¿Cuándo extiendes de la clase base Thread y cuando implementas la interface Runnable?
+8.	¿De qué clase debe heredar un Servlet?
+
